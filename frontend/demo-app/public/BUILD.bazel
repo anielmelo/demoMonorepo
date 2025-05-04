@@ -1,0 +1,13 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+
+js_library(
+    name = "public",
+    srcs = [
+        "file.svg",
+        "globe.svg",
+        "next.svg",
+        "vercel.svg",
+        "window.svg",
+    ],
+    visibility = ["//frontend/demo-app:__subpackages__"],
+)

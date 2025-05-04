@@ -1,0 +1,31 @@
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+
+SRCS = [
+    "app/favicon.ico",
+    "app/globals.css",
+    "app/layout.tsx",
+    "app/page.tsx",
+]
+
+js_library(
+    name = "src",
+    srcs = SRCS,
+    visibility = ["//frontend/demo-app:__subpackages__"],
+)
+
+ts_project(
+    name = "app",
+    srcs = SRCS,
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = "tsc",
+    tsconfig = "//frontend/demo-app:tsconfig",
+    visibility = ["//frontend/demo-app:__subpackages__"],
+    deps = [
+        "//frontend/demo-app:node_modules/@types/node",
+        "//frontend/demo-app:node_modules/@types/react",
+        "//frontend/demo-app:node_modules/@types/react-dom",
+        "//frontend/demo-app:node_modules/next",
+    ],
+)
