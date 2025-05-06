@@ -1,2 +1,38 @@
-# demoMonorepo
-demo monorepo using bazel - fullstack project.
+# [demo] — Solução Monorepo Fullstack
+
+Este repositório é uma **solução fullstack monorepo** que integra um ecossistema robusto para desenvolvimento de aplicações modernas, escaláveis e modulares. Aqui, combinamos o poder de **TypeScript**, **Next.js**, **Spring**, **PostgreSQL** e ferramentas de automação como **Nx** e **Bazel**, em um único workspace eficiente e bem organizado.
+
+---
+
+## Tecnologias Utilizadas
+
+- **Frontend**
+  - [TypeScript](https://www.typescriptlang.org/)
+  - [Next.js](https://nextjs.org/)
+  - [Nx](https://nx.dev/) — Ferramenta monorepo para organização e escalabilidade
+  - [pnpm](https://pnpm.io/) — Gerenciador de pacotes rápido e eficiente
+
+- **Backend**
+  - [Java](https://dev.java)
+  - [Spring Boot](https://spring.io/projects/spring-boot)
+  - [PostgreSQL](https://www.postgresql.org/) — Banco de dados relacional
+
+---
+
+## Estrutura do Projeto
+
+```sh
+
+├── apis/ # Microservices (Java + Spring Boot)
+│ └── ...
+│
+├── apps/ # Aplicações Frontend (Ex: Next.js)
+│ ├── next-app/ # Exemplo de app
+│ └── ...
+│
+├── packages/ # Pacotes compartilhados
+│ ├── libs/ # Biblioteca de componentes da interface
+│
+├── pnpm-workspace.yaml
+└── ...
+```
