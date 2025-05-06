@@ -1,6 +1,6 @@
 # [demo] — Solução Monorepo Fullstack
 
-Este repositório é uma **solução fullstack monorepo** que integra um ecossistema robusto para desenvolvimento de aplicações modernas, escaláveis e modulares. Aqui, combinamos o poder de **TypeScript**, **Next.js**, **Spring**, **PostgreSQL** e ferramentas de automação como **Nx** e **Bazel**, em um único workspace eficiente e bem organizado.
+Este repositório é uma **solução fullstack monorepo** utilizando pnpm.
 
 ---
 
