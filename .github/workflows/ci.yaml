@@ -15,7 +15,7 @@ jobs:
 
     - name: SonarQube Scan
       uses: SonarSource/sonarqube-scan-action@v5.2.0
-      env: # definir variáveis de ambiente remotas
+      env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
       with:
@@ -32,6 +32,6 @@ jobs:
         projectBaseDir: apps
         pollingTimeoutSec: 600
         scanMetadataReportFile: apps/.scannerwork/report-task.txt
-      env: # definir variáveis de ambiente remotas
+      env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
