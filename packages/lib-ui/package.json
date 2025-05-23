@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "lib for next-app",
   "main": "dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rm -rf dist && tsc"
   },
@@ -15,6 +17,7 @@
     "react": "^19.1.0"
   },
   "devDependencies": {
+    "sonar-scanner": "^3.1.0",
     "typescript": "^5.8.3"
   }
 }
