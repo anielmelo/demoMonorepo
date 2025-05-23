@@ -23,6 +23,7 @@ jobs:
           -Dsonar.projectKey=demoMonoRepo
           -Dsonar.sources=.
           -Dsonar.projectBaseDir=apps
+        scanMetadataReportFile: apps/.scannerwork/report-task.txt
     
     - name: SonarQube Quality Gate check
       id: sonarqube-quality-gate-check
@@ -30,6 +31,7 @@ jobs:
       with:
         projectBaseDir: apps
         pollingTimeoutSec: 600
+        scanMetadataReportFile: apps/.scannerwork/report-task.txt
       env: # definir variáveis de ambiente remotas
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
