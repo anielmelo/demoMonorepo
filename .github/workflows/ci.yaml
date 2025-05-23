@@ -28,6 +28,7 @@ jobs:
       id: sonarqube-quality-gate-check
       uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
       with:
+        projectBaseDir: apps
         pollingTimeoutSec: 600
       env: # definir variáveis de ambiente remotas
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
