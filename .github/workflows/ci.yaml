@@ -19,7 +19,10 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
       with:
-        projectBaseDir: apps
+        args: >
+          -Dsonar.projectKey=demoMonoRepo
+          -Dsonar.sources=.
+          -Dsonar.projectBaseDir=apps
     
     - name: SonarQube Quality Gate check
       id: sonarqube-quality-gate-check
