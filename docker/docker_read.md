@@ -67,3 +67,4 @@ sudo rm -rf ~/.sonar/cache
 
 erro de client-id
 erro http
+erro https
