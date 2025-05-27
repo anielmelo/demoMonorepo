@@ -9,7 +9,6 @@ Este repositório é uma **solução fullstack monorepo** utilizando pnpm.
 - **Frontend**
   - [TypeScript](https://www.typescriptlang.org/)
   - [Next.js](https://nextjs.org/)
-  - [Nx](https://nx.dev/) — Ferramenta monorepo para organização e escalabilidade
   - [pnpm](https://pnpm.io/) — Gerenciador de pacotes rápido e eficiente
 
 - **Backend**

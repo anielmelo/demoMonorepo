@@ -64,6 +64,3 @@ sudo rm -rf ~/.sonar/cache
 - [ ] automatizar a análise de código na pipeline
 - [ ] estudar maneiras de implementar o sonarqube em uma arquitetura fulstack de maneira escalável
 - [ ] estudar o arquivo de configuração do sonarqube .properties
-
-
-teste de ci
