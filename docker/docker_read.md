@@ -66,3 +66,4 @@ sudo rm -rf ~/.sonar/cache
 - [ ] estudar o arquivo de configuração do sonarqube .properties
 
 erro de client-id
+erro http
