@@ -60,11 +60,53 @@ sudo rm -rf ~/.sonar/cache
 - sonarqube para bloquear novos códigos possivelmente problemáticos:
 [SonarQube Quality Gate Check](https://github.com/marketplace/actions/sonarqube-quality-gate-check)
 
-#### PONTOS DE MELHORA
-- [ ] automatizar a análise de código na pipeline
-- [ ] estudar maneiras de implementar o sonarqube em uma arquitetura fulstack de maneira escalável
-- [ ] estudar o arquivo de configuração do sonarqube .properties
 
-erro de client-id
-erro http
-erro https
+## Pipeline (implementação)
+
+pipeline para executar o sonarqube automaticamente ao realizar (pushs e pull_requests):
+```sh
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+      types: [opened, synchronize, reopened]
+
+name: Main Workflow
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: CloudFlare auth
+      uses: Boostport/setup-cloudflare-warp@v1.12.0
+      with:
+        organization: ideia
+        auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
+        auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+
+    - name: SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v5.2.0
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      with:
+        args: >
+          -Dsonar.projectKey=harpia
+          -Dsonar.sources=.
+          -Dsonar.projectBaseDir=apps
+        scanMetadataReportFile: apps/.scannerwork/report-task.txt
+    
+    - name: SonarQube Quality Gate check
+      id: sonarqube-quality-gate-check
+      uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
+      with:
+        projectBaseDir: apps
+        pollingTimeoutSec: 600
+        scanMetadataReportFile: apps/.scannerwork/report-task.txt
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+```
