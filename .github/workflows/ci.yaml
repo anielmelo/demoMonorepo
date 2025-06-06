@@ -1,8 +1,8 @@
+name: SonarQube Workflow
+
 on:
   schedule:
-    - cron: '45 13 * * *'
-
-name: SonarQube Workflow
+    - cron: '0 17 * * *'
 
 jobs:
   sonarqube:
