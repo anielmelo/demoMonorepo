@@ -1,44 +1,41 @@
 on:
-  push:
-    branches:
-      - main
-      - dev
-  pull_request:
-      types: [opened, synchronize, reopened]
+  schedule:
+    - cron: '30 16 * * *'
 
-name: Main Workflow
+name: SonarQube Workflow
+
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev
 
-    - name: CloudFlare auth
-      uses: Boostport/setup-cloudflare-warp@v1.12.0
-      with:
-        organization: ideia
-        auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
-        auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+      - name: CloudFlare Authentication
+        uses: Boostport/setup-cloudflare-warp@v1.12.0
+        with:
+          organization: ideia
+          auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
+          auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v5.2.0
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
-      with:
-        args: >
-          -Dsonar.projectKey=harpia
-          -Dsonar.sources=.
-          -Dsonar.projectBaseDir=apps
-        scanMetadataReportFile: apps/.scannerwork/report-task.txt
-    
-    - name: SonarQube Quality Gate check
-      id: sonarqube-quality-gate-check
-      uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
-      with:
-        projectBaseDir: apps
-        pollingTimeoutSec: 600
-        scanMetadataReportFile: apps/.scannerwork/report-task.txt
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5.2.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=sonarqube-poc
+            -Dsonar.sources=.
+            -Dsonar.projectBaseDir=apps
+
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
+        with:
+          scanMetadataReportFile: apps/.scannerwork/report-task.txt
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
