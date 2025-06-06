@@ -2,7 +2,7 @@ name: SonarQube Workflow
 
 on:
   schedule:
-    - cron: '0 17 * * *'
+    - cron: '5 14 * * *'
 
 jobs:
   sonarqube:
