@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '30 16 * * *'
+    - cron: '45 13 * * *'
 
 name: SonarQube Workflow
 
